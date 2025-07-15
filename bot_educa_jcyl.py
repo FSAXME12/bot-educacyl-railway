@@ -61,7 +61,7 @@ vistos = cargar_urls_previas()
 while True:
     print("🔍 Buscando nuevas noticias...")
     nuevas = obtener_noticias()
-    nuevas.append(("🧪 Noticia de prueba", "https://prueba.fake"))
+    nuevas.append(("🧪 Noticia de prueba jajaja", "https://prueba.fake"))
 
 
     for titulo, enlace in nuevas:
