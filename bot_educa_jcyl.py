@@ -5,8 +5,8 @@ import time
 
 # Configuración
 url = "https://www.educa.jcyl.es/profesorado/es/oposiciones/oposiciones-cuerpo-maestros/oposiciones-2025-cuerpo-maestros"
-bot_token = os.getenv("7993611113:AAH4tdw0dvziFeDZvpM4RB0RfJ1cP33mzJ8")  # Desde variables de entorno en Railway
-chat_id = os.getenv("8433465")      # Desde variables de entorno en Railway
+bot_token = os.getenv("BOT_TOKEN")
+chat_id = os.getenv("CHAT_ID")
 registro_url = "registro_urls.txt"
 
 def obtener_noticias():
