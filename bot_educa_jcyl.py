@@ -5,8 +5,8 @@ import time
 
 # Configuración
 url = "https://www.educa.jcyl.es/profesorado/es/oposiciones/oposiciones-cuerpo-maestros/oposiciones-2025-cuerpo-maestros"
-bot_token = os.getenv("BOT_TOKEN")
-chat_id = os.getenv("CHAT_ID")
+bot_token = os.getenv("BOT_TOKEN")  # Token desde variable de entorno
+chat_id = os.getenv("CHAT_ID")      # Chat ID desde variable de entorno
 registro_url = "registro_urls.txt"
 
 def obtener_noticias():
@@ -61,7 +61,7 @@ vistos = cargar_urls_previas()
 while True:
     print("🔍 Buscando nuevas noticias...")
     nuevas = obtener_noticias()
-    nuevas.append(("🧪 Noticia de prueba jajaja", "https://prueba.fake"))
+    nuevas.append(("🧪 Noticia de prueba", "https://prueba.fake"))
 
 
     for titulo, enlace in nuevas:
