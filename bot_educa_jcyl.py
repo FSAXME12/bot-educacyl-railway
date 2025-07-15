@@ -10,6 +10,8 @@ chat_id = os.getenv("8433465")      # Desde variables de entorno en Railway
 registro_url = "registro_urls.txt"
 
 def obtener_noticias():
+    nuevas.append(("🧪 Noticia de prueba", "https://prueba.fake"))
+
     try:
         r = requests.get(url, timeout=10)
         soup = BeautifulSoup(r.text, 'html.parser')
