@@ -1,6 +1,10 @@
 {
   "build": {
-    "builder": "NIXPACKS"
+    "env": {
+      "PYTHON_VERSION": "3.10"
+    }
   },
-  "start": "python bot_educa_jcyl.py"
+  "deploy": {
+    "startCommand": "python3 bot_educa_jcyl.py"
+  }
 }
