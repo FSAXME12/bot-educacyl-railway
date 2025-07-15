@@ -2,5 +2,5 @@
   "build": {
     "builder": "NIXPACKS"
   },
-  "start": "python bot_educa_jcyl.py"
+  "start": "python3 bot_educa_jcyl.py"
 }
