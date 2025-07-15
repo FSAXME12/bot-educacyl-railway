@@ -8,8 +8,11 @@
     "startCommand": "python3 bot_educa_jcyl.py"
   },
   "services": {
-    "bot-educacyl": {
-      "type": "worker"
+    "bot-educacyl-railway": {
+      "startCommand": "python3 bot_educa_jcyl.py",
+      "runCommand": "python3 bot_educa_jcyl.py",
+      "healthcheckPath": "/",
+      "autoDeploy": true
     }
   }
 }
