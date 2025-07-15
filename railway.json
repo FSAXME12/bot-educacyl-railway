@@ -6,5 +6,10 @@
   },
   "deploy": {
     "startCommand": "python3 bot_educa_jcyl.py"
+  },
+  "services": {
+    "bot-educacyl": {
+      "type": "worker"
+    }
   }
 }
