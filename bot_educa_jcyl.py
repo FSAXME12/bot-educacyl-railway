@@ -1,11 +1,12 @@
 import requests
 from bs4 import BeautifulSoup
 import os
+import time
 
 # Configuración
 url = "https://www.educa.jcyl.es/profesorado/es/oposiciones/oposiciones-cuerpo-maestros/oposiciones-2025-cuerpo-maestros"
-bot_token = os.getenv("7993611113:AAH4tdw0dvziFeDZvpM4RB0RfJ1cP33mzJ8")  # Cargado desde variable en Railway
-chat_id = os.getenv("8433465")      # Cargado desde variable en Railway
+bot_token = os.getenv("7993611113:AAH4tdw0dvziFeDZvpM4RB0RfJ1cP33mzJ8")  # Desde variables de entorno en Railway
+chat_id = os.getenv("8433465")      # Desde variables de entorno en Railway
 registro_url = "registro_urls.txt"
 
 def obtener_noticias():
@@ -25,7 +26,7 @@ def obtener_noticias():
                 noticias.append((titulo, enlace))
         return noticias
     except Exception as e:
-        print("⚠️ Error:", e)
+        print("⚠️ Error al obtener noticias:", e)
         return []
 
 def enviar_telegram(msg):
@@ -33,10 +34,11 @@ def enviar_telegram(msg):
         print("❌ BOT_TOKEN o CHAT_ID no definido.")
         return
     try:
-        requests.get(f"https://api.telegram.org/bot{bot_token}/sendMessage", params={
+        response = requests.get(f"https://api.telegram.org/bot{bot_token}/sendMessage", params={
             "chat_id": chat_id,
             "text": msg
         })
+        print("📨 Mensaje enviado:", response.status_code)
     except Exception as e:
         print("❌ Error enviando Telegram:", e)
 
@@ -50,17 +52,23 @@ def cargar_urls_previas():
 def guardar_urls(urls):
     with open(registro_url, "w") as f:
         for u in urls:
-            f.write(u + "\\n")
+            f.write(u + "\n")
 
-# === EJECUCIÓN UNA SOLA VEZ ===
+# === MONITORIZACIÓN CONTINUA ===
+print("🕵️‍♂️ Iniciando monitorización de EDUCA JCYL...")
 vistos = cargar_urls_previas()
-nuevas = obtener_noticias()
 
-for titulo, enlace in nuevas:
-    if enlace not in vistos:
-        msg = f"📰 ¡Nueva publicación detectada!\\n📌 {titulo}\\n🔗 {enlace}"
-        enviar_telegram(msg)
-        print(f"✅ Notificada: {titulo}")
-        vistos.add(enlace)
+while True:
+    print("🔍 Buscando nuevas noticias...")
+    nuevas = obtener_noticias()
 
-guardar_urls(vistos)
+    for titulo, enlace in nuevas:
+        if enlace not in vistos:
+            msg = f"📰 ¡Nueva publicación detectada!\n📌 {titulo}\n🔗 {enlace}"
+            enviar_telegram(msg)
+            print(f"✅ Notificada: {titulo}")
+            vistos.add(enlace)
+
+    guardar_urls(vistos)
+    print("✅ Esperando 5 minutos...\n")
+    time.sleep(300)
