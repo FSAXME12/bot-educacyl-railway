@@ -73,4 +73,4 @@ while True:
 
     guardar_urls(vistos)
     print("✅ Esperando 5 minutos...\n")
-    time.sleep(300)
+    time.sleep(600)
